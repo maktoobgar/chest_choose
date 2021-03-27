@@ -1,0 +1,14 @@
+# Local resources repository
+resources
+
+# config files for backend
+.env
+
+# Node modules
+node_modules
+
+# Adonis directory for storing tmp files
+tmp
+
+# The development sqlite file
+database/*.sqlite

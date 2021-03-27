@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# If it is not running iteratively, don't do anything
+case $- in
+    *i*) ;;
+      *) echo Please run this script Iteratively, I mean use \"source\" instead of \"\./\" && exit;;
+esac
+
+# Installing some packages on linux
+echo && echo Installing nodejs, gcc, libpq-dev, lolcat, mysql-server and mysql-client && echo
+sudo apt-get install nodejs gcc libpq-dev lolcat mysql-server mysql-client libmysqlclient-dev -y
+echo && echo Checking if nodejs is installed | lolcat -d 1 && echo
+node --version
+echo && echo Checking if mysql is installed | lolcat -d 1 && echo
+mysql --version
+echo && echo And lolcat, mysql-server and mysql-client should be installed on your system now | lolcat -d 1 && echo
+
+# Installing adonis
+echo && echo Installing adonis globally on your system | lolcat -d 1 && echo
+sudo npm install -g adonis
+
+# Installing fa local font-currency etc support
+echo && echo Installing a persian package on your system | lolcat -d 1 && echo
+sudo apt-get install language-pack-fa
+
+# Setting shortcuts and environment variables
+echo && echo Loading shortcuts and environment variables | lolcat -d 1 && echo
+alias stickers="echo stickers:;echo ⚜️ = initial commit;echo 🐛 = bug fixing;echo 🔧 = updated functionality;echo ✅ = new feature added;echo ♻️  = code review;echo ❌ = removed a file or folder;"
+
+# Installing requirements for project
+echo && echo Installing the requirements | lolcat -d 1 && echo
+npm install
+adonis install mysql
+adonis install @adonisjs/validator
+
+# Everything is done
+echo && echo "The installation process is done" | lolcat -d 1
+echo "After checking the log, if there is no problem, you can run the server with \"adonis serve --dev\" command" | lolcat -d 1
+echo "Press any button to continue to mysql configuration" | lolcat -d 1
+read temp
+
+# Configuration for mysql
+source ./commands/mysql_config
