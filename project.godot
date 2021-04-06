@@ -18,6 +18,11 @@ _global_script_class_icons={
 config/name="Open Boxes Game"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/fps/force_fps=60
+gdscript/warnings/unsafe_property_access=true
+
 [display]
 
 window/size/width=576
@@ -61,4 +66,5 @@ ui_shift={
 
 [rendering]
 
+threads/thread_model=2
 environment/default_environment="res://default_env.tres"
