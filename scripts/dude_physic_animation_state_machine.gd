@@ -1,12 +1,18 @@
 extends KinematicBody2D
 
-const SPEED: int = 30
-const SPEEDPLUS: int = 50
+const SPEED: int = 20
+const SPEEDPLUS: int = 30
+const GRAVITY: int = 200
+const JUMP: int = -350
+const NOT_ON_FLOOR_LIMIT: int = 10
 
-enum {Idle, Walk, Run ,Attack, Walk_Attack, Jump, Climb, Hurt, Die}
+enum {Idle, Walk, Run ,Attack, Walk_Attack, Jump, Fall, Climb, Hurt, Die}
 
 var character_state = Idle
 var speed: float = 0
+var gravity: float = 0
+var not_on_floor_ignore_times: int = 0
+var velocity: Vector2 = Vector2.ZERO
 onready var state_machine: AnimationNodeStateMachinePlayback = get_node('./animationStateMachine').get('parameters/playback')
 onready var animation_tree: AnimationTree = get_node('./animationStateMachine')
 onready var character: Sprite = get_node('./character')
@@ -33,12 +39,27 @@ func move() -> void:
 		if Input.is_action_pressed('ui_shift'):
 			till = -SPEEDPLUS
 	speed = lerp(speed, till, 0.1)
-	move_and_slide(Vector2(speed, 0), Vector2(0, -1))
+	if is_on_floor():
+		if Input.is_action_just_pressed('ui_jump'):
+			gravity = 1
+			if randi() % 2 and state_machine.get_current_node() != 'Jump':
+				gravity = JUMP
+		else:
+			gravity = 1
+	else:
+		gravity = lerp(gravity, GRAVITY, 0.05)
+	velocity = move_and_slide(Vector2(speed, gravity), Vector2(0, -1), true, 4)
 
 func state_machine() -> void:
 	match character_state:
 		Idle:
-			if Input.is_action_pressed("ui_right"):
+			if not custom_is_on_floor() and velocity.y > 0:
+				state_machine.travel('Fall')
+				character_state = Fall
+			elif Input.is_action_just_pressed('ui_jump'):
+				state_machine.travel('Jump')
+				character_state = Jump
+			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
 					state_machine.travel('Run')
 					character_state = Run
@@ -55,11 +76,14 @@ func state_machine() -> void:
 			elif Input.is_action_just_pressed('ui_attack'):
 				state_machine.travel('Attack')
 				character_state = Attack
+		Walk:
+			if not custom_is_on_floor() and velocity.y > 0:
+				state_machine.travel('Fall')
+				character_state = Fall
 			elif Input.is_action_just_pressed('ui_jump'):
 				state_machine.travel('Jump')
 				character_state = Jump
-		Walk:
-			if Input.is_action_pressed("ui_right"):
+			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
 					state_machine.travel('Run')
 					character_state = Run
@@ -71,7 +95,13 @@ func state_machine() -> void:
 				state_machine.travel('Idle')
 				character_state = Idle
 		Run:
-			if Input.is_action_pressed("ui_right"):
+			if not custom_is_on_floor() and velocity.y > 0:
+				state_machine.travel('Fall')
+				character_state = Fall
+			elif Input.is_action_just_pressed('ui_jump'):
+				state_machine.travel('Jump')
+				character_state = Jump
+			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
 					return
 				state_machine.travel('Walk')
@@ -85,9 +115,24 @@ func state_machine() -> void:
 				state_machine.travel('Idle')
 				character_state = Idle
 		Attack:
-			character_state = Idle
+			if not custom_is_on_floor() and velocity.y > 0:
+				state_machine.travel('Fall')
+				character_state = Fall
+			elif Input.is_action_just_pressed('ui_jump'):
+				state_machine.travel('Jump')
+				character_state = Jump
+			else:
+				character_state = Idle
 		Jump:
-			character_state = Idle
+			if not custom_is_on_floor() and velocity.y > 0:
+				state_machine.travel('Fall')
+				character_state = Fall
+			else:
+				character_state = Idle
+		Fall:
+			if custom_is_on_floor():
+				state_machine.travel('Idle')
+				character_state = Idle
 
 func align_face() -> void:
 	if Input.is_action_pressed("ui_right_shift") or Input.is_action_pressed("ui_right"):
@@ -96,3 +141,13 @@ func align_face() -> void:
 	elif Input.is_action_pressed("ui_left_shift") or Input.is_action_pressed("ui_left"):
 		if character.scale.x != -1:
 			character.scale.x = -1
+
+func custom_is_on_floor():
+	if not is_on_floor():
+		not_on_floor_ignore_times += 1
+		if not_on_floor_ignore_times > NOT_ON_FLOOR_LIMIT:
+			not_on_floor_ignore_times = NOT_ON_FLOOR_LIMIT + 1
+			return false
+		return true
+	not_on_floor_ignore_times = 0
+	return true
