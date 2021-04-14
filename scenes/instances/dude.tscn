@@ -639,6 +639,7 @@ smoothing_speed = 1.0
 
 [node name="backgroundLayer" type="ParallaxLayer" parent="background"]
 motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( 0, -364.5 )
 motion_mirroring = Vector2( 1080, 0 )
 
 [node name="image" type="Sprite" parent="background/backgroundLayer"]
