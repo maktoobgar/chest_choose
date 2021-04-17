@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/instances/chest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/instances/dude.tscn" type="PackedScene" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://single-sprites/objects/Boxes/1.png" type="Texture" id=38]
 [ext_resource path="res://single-sprites/objects/Boxes/3.png" type="Texture" id=39]
 [ext_resource path="res://single-sprites/objects/Boxes/6.png" type="Texture" id=40]
+[ext_resource path="res://scenes/instances/mouse.tscn" type="PackedScene" id=41]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -1560,3 +1561,5 @@ position = Vector2( 16.6378, 268.184 )
 
 [node name="chest" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 192 )
+
+[node name="mouse" parent="." instance=ExtResource( 41 )]
