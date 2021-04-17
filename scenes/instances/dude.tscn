@@ -638,7 +638,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 current = true
 smoothing_speed = 1.0
 __meta__ = {
