@@ -1,5 +1,6 @@
-[gd_scene load_steps=119 format=2]
+[gd_scene load_steps=120 format=2]
 
+[ext_resource path="res://scenes/instances/chest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/instances/dude.tscn" type="PackedScene" id=2]
 [ext_resource path="res://single-sprites/objects/Ladders/ladder.png" type="Texture" id=3]
 [ext_resource path="res://single-sprites/tilesets/Tileset.png" type="Texture" id=4]
@@ -1034,7 +1035,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 2/shapes = [  ]
 2/z_index = 0
 
-[sub_resource type="TileSet" id=79]
+[sub_resource type="TileSet" id=76]
 0/name = "1.png 0"
 0/texture = ExtResource( 12 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1148,7 +1149,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 7/shapes = [  ]
 7/z_index = 0
 
-[sub_resource type="TileSet" id=80]
+[sub_resource type="TileSet" id=77]
 0/name = "1.png 0"
 0/texture = ExtResource( 18 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1290,7 +1291,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 9/shapes = [  ]
 9/z_index = 0
 
-[sub_resource type="TileSet" id=82]
+[sub_resource type="TileSet" id=78]
 0/name = "1.png 0"
 0/texture = ExtResource( 31 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1418,7 +1419,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 8/shapes = [  ]
 8/z_index = 0
 
-[sub_resource type="TileSet" id=83]
+[sub_resource type="TileSet" id=79]
 0/name = "1.png 0"
 0/texture = ExtResource( 38 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1528,31 +1529,34 @@ format = 1
 tile_data = PoolIntArray( 16581104, 0, 0 )
 
 [node name="pointer" type="TileMap" parent="tiles"]
-tile_set = SubResource( 79 )
+tile_set = SubResource( 76 )
 cell_size = Vector2( 1, 1 )
 centered_textures = true
 format = 1
 tile_data = PoolIntArray( 7733692, 6, 0, 11927878, 2, 0 )
 
 [node name="grass" type="TileMap" parent="tiles"]
-tile_set = SubResource( 80 )
+tile_set = SubResource( 77 )
 cell_size = Vector2( 1, 1 )
 centered_textures = true
 format = 1
 tile_data = PoolIntArray( 12058797, 0, 0, 18481175, 7, 0, 20447412, 0, 0, 20512970, 1, 0, 20578679, 7, 0, 20644120, 3, 0, 20644133, 9, 0, 20644299, 3, 0, 20775296, 8, 0 )
 
 [node name="bush" type="TileMap" parent="tiles"]
-tile_set = SubResource( 82 )
+tile_set = SubResource( 78 )
 cell_size = Vector2( 1, 1 )
 centered_textures = true
 format = 1
 tile_data = PoolIntArray( 10223998, 1, 0, 20513274, 0, 0 )
 
 [node name="box" type="TileMap" parent="tiles"]
-tile_set = SubResource( 83 )
+tile_set = SubResource( 79 )
 cell_size = Vector2( 1, 1 )
 format = 1
 tile_data = PoolIntArray( 4522285, 0, 0 )
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
 position = Vector2( 16.6378, 268.184 )
+
+[node name="chest" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 192 )
