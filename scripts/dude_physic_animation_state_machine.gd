@@ -13,19 +13,19 @@ var speed: float = 0
 var gravity: float = 0
 var not_on_floor_ignore_times: int = 0
 var velocity: Vector2 = Vector2.ZERO
-onready var state_machine: AnimationNodeStateMachinePlayback = get_node('./animationStateMachine').get('parameters/playback')
+onready var animation_state_machine: AnimationNodeStateMachinePlayback = get_node('./animationStateMachine').get('parameters/playback')
 onready var animation_tree: AnimationTree = get_node('./animationStateMachine')
 onready var character: Sprite = get_node('./character')
 
 func _ready():
-	state_machine.start('Idle')
+	animation_state_machine.start('Idle')
 	animation_tree.active = true
 
 func _physics_process(delta):
 	move()
 
 func _process(delta):
-	state_machine()
+	change_animation_state_machine()
 	align_face()
 
 func move() -> void:
@@ -42,7 +42,7 @@ func move() -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed('ui_jump'):
 			gravity = 1
-			if randi() % 2 and state_machine.get_current_node() != 'Jump':
+			if randi() % 2 and animation_state_machine.get_current_node() != 'Jump':
 				gravity = JUMP
 		else:
 			gravity = 1
@@ -50,88 +50,88 @@ func move() -> void:
 		gravity = lerp(gravity, GRAVITY, 0.05)
 	velocity = move_and_slide(Vector2(speed, gravity), Vector2(0, -1), true, 4)
 
-func state_machine() -> void:
+func change_animation_state_machine() -> void:
 	match character_state:
 		Idle:
 			if not custom_is_on_floor() and velocity.y > 0:
-				state_machine.travel('Fall')
+				animation_state_machine.travel('Fall')
 				character_state = Fall
 			elif Input.is_action_just_pressed('ui_jump'):
-				state_machine.travel('Jump')
+				animation_state_machine.travel('Jump')
 				character_state = Jump
 			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
-					state_machine.travel('Run')
+					animation_state_machine.travel('Run')
 					character_state = Run
 					return
-				state_machine.travel('Walk')
+				animation_state_machine.travel('Walk')
 				character_state = Walk
 			elif Input.is_action_pressed("ui_left"):
 				if Input.is_action_pressed("ui_shift"):
-					state_machine.travel('Run')
+					animation_state_machine.travel('Run')
 					character_state = Run
 					return
-				state_machine.travel('Walk')
+				animation_state_machine.travel('Walk')
 				character_state = Walk
 			elif Input.is_action_just_pressed('ui_attack'):
-				state_machine.travel('Attack')
+				animation_state_machine.travel('Attack')
 				character_state = Attack
 		Walk:
 			if not custom_is_on_floor() and velocity.y > 0:
-				state_machine.travel('Fall')
+				animation_state_machine.travel('Fall')
 				character_state = Fall
 			elif Input.is_action_just_pressed('ui_jump'):
-				state_machine.travel('Jump')
+				animation_state_machine.travel('Jump')
 				character_state = Jump
 			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
-					state_machine.travel('Run')
+					animation_state_machine.travel('Run')
 					character_state = Run
 			elif Input.is_action_pressed("ui_left"):
 				if Input.is_action_pressed("ui_shift"):
-					state_machine.travel('Run')
+					animation_state_machine.travel('Run')
 					character_state = Run
 			else:
-				state_machine.travel('Idle')
+				animation_state_machine.travel('Idle')
 				character_state = Idle
 		Run:
 			if not custom_is_on_floor() and velocity.y > 0:
-				state_machine.travel('Fall')
+				animation_state_machine.travel('Fall')
 				character_state = Fall
 			elif Input.is_action_just_pressed('ui_jump'):
-				state_machine.travel('Jump')
+				animation_state_machine.travel('Jump')
 				character_state = Jump
 			elif Input.is_action_pressed("ui_right"):
 				if Input.is_action_pressed('ui_shift'):
 					return
-				state_machine.travel('Walk')
+				animation_state_machine.travel('Walk')
 				character_state = Walk
 			elif Input.is_action_pressed("ui_left"):
 				if Input.is_action_pressed("ui_shift"):
 					return
-				state_machine.travel('Walk')
+				animation_state_machine.travel('Walk')
 				character_state = Walk
 			else:
-				state_machine.travel('Idle')
+				animation_state_machine.travel('Idle')
 				character_state = Idle
 		Attack:
 			if not custom_is_on_floor() and velocity.y > 0:
-				state_machine.travel('Fall')
+				animation_state_machine.travel('Fall')
 				character_state = Fall
 			elif Input.is_action_just_pressed('ui_jump'):
-				state_machine.travel('Jump')
+				animation_state_machine.travel('Jump')
 				character_state = Jump
 			else:
 				character_state = Idle
 		Jump:
 			if not custom_is_on_floor() and velocity.y > 0:
-				state_machine.travel('Fall')
+				animation_state_machine.travel('Fall')
 				character_state = Fall
 			else:
 				character_state = Idle
 		Fall:
 			if custom_is_on_floor():
-				state_machine.travel('Idle')
+				animation_state_machine.travel('Idle')
 				character_state = Idle
 
 func align_face() -> void:
