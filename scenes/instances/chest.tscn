@@ -45,6 +45,7 @@ monitorable = false
 script = ExtResource( 2 )
 
 [node name="chestAnimation" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 1 )
 frames = SubResource( 6 )
 animation = "Idle"
 playing = true
