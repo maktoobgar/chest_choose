@@ -1558,11 +1558,14 @@ cell_size = Vector2( 1, 1 )
 format = 1
 tile_data = PoolIntArray( 4522285, 0, 0 )
 
+[node name="chest2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 160 )
+
 [node name="chest" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 192 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 32, 256 )
+position = Vector2( 96, 192 )
 
 [node name="cameraCanvas" type="CanvasLayer" parent="."]
 
