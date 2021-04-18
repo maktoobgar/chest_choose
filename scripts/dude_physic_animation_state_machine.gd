@@ -8,16 +8,22 @@ const NOT_ON_FLOOR_LIMIT: int = 10
 
 enum {Idle, Walk, Run ,Attack, Walk_Attack, Jump, Fall, Climb, Hurt, Die}
 
+signal allow_move
+signal stop_move
+
 var character_state = Idle
 var speed: float = 0
 var gravity: float = 0
 var not_on_floor_ignore_times: int = 0
 var velocity: Vector2 = Vector2.ZERO
+var allowed: bool = true
 onready var animation_state_machine: AnimationNodeStateMachinePlayback = get_node('./animationStateMachine').get('parameters/playback')
 onready var animation_tree: AnimationTree = get_node('./animationStateMachine')
 onready var character: Sprite = get_node('./character')
 
 func _ready():
+	self.connect("allow_move", self, "allow_move_func")
+	self.connect("stop_move", self, "stop_move_func")
 	animation_state_machine.start('Idle')
 	animation_tree.active = true
 
@@ -29,6 +35,9 @@ func _process(delta):
 	align_face()
 
 func move() -> void:
+	if not allowed:
+		velocity = move_and_slide(Vector2(0, 0), Vector2(0, -1), true, 4)
+		return
 	var till: float = 0
 	if Input.is_action_pressed("ui_right"):
 		till = SPEED
@@ -51,6 +60,8 @@ func move() -> void:
 	velocity = move_and_slide(Vector2(speed, gravity), Vector2(0, -1), true, 4)
 
 func change_animation_state_machine() -> void:
+	if not allowed:
+		animation_state_machine.stop()
 	match character_state:
 		Idle:
 			if not custom_is_on_floor() and velocity.y > 0:
@@ -135,6 +146,8 @@ func change_animation_state_machine() -> void:
 				character_state = Idle
 
 func align_face() -> void:
+	if not allowed:
+		return
 	if Input.is_action_pressed("ui_right_shift") or Input.is_action_pressed("ui_right"):
 		if character.scale.x != 1:
 			character.scale.x = 1
@@ -142,7 +155,7 @@ func align_face() -> void:
 		if character.scale.x != -1:
 			character.scale.x = -1
 
-func custom_is_on_floor():
+func custom_is_on_floor() -> bool:
 	if not is_on_floor():
 		not_on_floor_ignore_times += 1
 		if not_on_floor_ignore_times > NOT_ON_FLOOR_LIMIT:
@@ -151,3 +164,10 @@ func custom_is_on_floor():
 		return true
 	not_on_floor_ignore_times = 0
 	return true
+
+func allow_move_func() -> void:
+	allowed = true
+	animation_state_machine.start(animation_state_machine.get_current_node())
+
+func stop_move_func() -> void:
+	allowed = false

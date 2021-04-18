@@ -7,6 +7,7 @@ onready var mouseSprite: Sprite = get_node_or_null('./mouseSprite')
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	self.visible = false
 
 func _process(delta):
 	self.position = get_global_mouse_position()

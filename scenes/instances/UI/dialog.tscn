@@ -54,12 +54,3 @@ text = "Press F To Open-E To Lock On"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="blankFiller" type="CenterContainer" parent="background/VBoxContainer"]
-margin_top = 39.0
-margin_right = 288.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 0, 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

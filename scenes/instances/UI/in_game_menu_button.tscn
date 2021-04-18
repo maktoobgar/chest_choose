@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/button_text_change.gd" type="Script" id=1]
+[ext_resource path="res://single-sprites/objects/UI/button.png" type="Texture" id=2]
+[ext_resource path="res://single-sprites/objects/UI/button_up.png" type="Texture" id=3]
+[ext_resource path="res://single-sprites/objects/UI/button_hover.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[node name="marginContainer" type="CenterContainer"]
+margin_right = 162.0
+margin_bottom = 150.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="TextureButton" parent="."]
+margin_left = 43.0
+margin_top = 43.0
+margin_right = 119.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 76, 63 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+expand = true
+stretch_mode = 3
+
+[node name="label" type="Label" parent="image"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "Exit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="refrenceContainer" type="MarginContainer" parent="."]
+margin_left = 81.0
+margin_right = 81.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

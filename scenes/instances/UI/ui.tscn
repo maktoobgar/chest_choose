@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/instances/UI/in_game_menu_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/ui.gd" type="Script" id=2]
+
+[node name="ui" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.807843 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.392157, 0.352941, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mainSeperator" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="MarginContainer" parent="mainSeperator"]
+margin_right = 162.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+
+[node name="leftSeperator" type="VBoxContainer" parent="mainSeperator/left"]
+margin_right = 162.0
+margin_bottom = 324.0
+alignment = 2
+
+[node name="refrenceLeftContainer" parent="mainSeperator/left/leftSeperator" instance=ExtResource( 1 )]
+margin_top = 174.0
+margin_bottom = 324.0
+text = "Exit"
+
+[node name="middle" type="MarginContainer" parent="mainSeperator"]
+margin_left = 166.0
+margin_right = 409.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="right" type="MarginContainer" parent="mainSeperator"]
+margin_left = 413.0
+margin_right = 576.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+
+[node name="rightSeperator" type="VBoxContainer" parent="mainSeperator/right"]
+margin_right = 163.0
+margin_bottom = 324.0
+alignment = 2
+
+[node name="refrenceLeftContainer" parent="mainSeperator/right/rightSeperator" instance=ExtResource( 1 )]
+margin_top = 174.0
+margin_right = 163.0
+margin_bottom = 324.0
+text = "Back"
