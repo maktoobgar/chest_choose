@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=123 format=2]
 
 [ext_resource path="res://scenes/instances/chest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/instances/dude.tscn" type="PackedScene" id=2]
@@ -41,6 +41,8 @@
 [ext_resource path="res://single-sprites/objects/Boxes/3.png" type="Texture" id=39]
 [ext_resource path="res://single-sprites/objects/Boxes/6.png" type="Texture" id=40]
 [ext_resource path="res://scenes/instances/mouse.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scenes/instances/UI/ui.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scenes/instances/UI/dialog.tscn" type="PackedScene" id=43]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -1556,10 +1558,16 @@ cell_size = Vector2( 1, 1 )
 format = 1
 tile_data = PoolIntArray( 4522285, 0, 0 )
 
-[node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 16.6378, 268.184 )
-
 [node name="chest" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 192 )
 
-[node name="mouse" parent="." instance=ExtResource( 41 )]
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 256 )
+
+[node name="cameraCanvas" type="CanvasLayer" parent="."]
+
+[node name="dialog" parent="cameraCanvas" instance=ExtResource( 43 )]
+
+[node name="ui" parent="cameraCanvas" instance=ExtResource( 42 )]
+
+[node name="mouse" parent="cameraCanvas" instance=ExtResource( 41 )]
