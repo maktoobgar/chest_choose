@@ -10,6 +10,8 @@ enum {Idle, Walk, Run ,Attack, Walk_Attack, Jump, Fall, Climb, Hurt, Die}
 
 signal allow_move
 signal stop_move
+signal set_box
+signal clean_box
 
 var character_state = Idle
 var speed: float = 0
@@ -17,6 +19,7 @@ var gravity: float = 0
 var not_on_floor_ignore_times: int = 0
 var velocity: Vector2 = Vector2.ZERO
 var allowed: bool = true
+var box: Area2D = null
 onready var animation_state_machine: AnimationNodeStateMachinePlayback = get_node('./animationStateMachine').get('parameters/playback')
 onready var animation_tree: AnimationTree = get_node('./animationStateMachine')
 onready var character: Sprite = get_node('./character')
@@ -24,6 +27,8 @@ onready var character: Sprite = get_node('./character')
 func _ready():
 	self.connect("allow_move", self, "allow_move_func")
 	self.connect("stop_move", self, "stop_move_func")
+	self.connect("set_box", self, "set_box_func")
+	self.connect("clean_box", self, "clean_box_func")
 	animation_state_machine.start('Idle')
 	animation_tree.active = true
 
@@ -171,3 +176,14 @@ func allow_move_func() -> void:
 
 func stop_move_func() -> void:
 	allowed = false
+
+func set_box_func(selected) -> void:
+	selected.emit_signal('select_and_set_color')
+	if box:
+		box.emit_signal('select_and_set_color')
+	box = selected
+
+func clean_box_func() -> void:
+	if box:
+		box.emit_signal('select_and_set_color')
+	box = null
