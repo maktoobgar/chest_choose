@@ -187,3 +187,8 @@ func clean_box_func() -> void:
 	if box:
 		box.emit_signal('select_and_set_color')
 	box = null
+
+func has_box_func() -> bool:
+	if box:
+		return true
+	return false

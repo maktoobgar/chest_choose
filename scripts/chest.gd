@@ -7,18 +7,24 @@ onready var root = get_tree().root.get_child(0)
 onready var chestAnimation = get_node_or_null('./chestAnimation')
 onready var player = root.find_node('player')
 onready var dialog: HBoxContainer = root.find_node('dialog')
+onready var scroll: Control = root.find_node('scroll')
 var collided: bool = false
 var opened: bool = false
 var openable: bool = true
+
+export(String) var title
+export(String) var context
 
 func _ready():
 	self.connect('select_and_set_color', self, 'select_and_set_color_func')
 
 func _process(delta):
 	if Input.is_action_just_released("ui_interact"):
-		if collided and not opened and openable:
+		if collided and not opened and openable and player.has_box_func():
 			opened = true
 			chestAnimation.play("Open")
+			scroll.emit_signal('play', ['Title', 'text'])
+			player.emit_signal("stop_move")
 			dialog.visible = false
 	elif Input.is_action_just_released("ui_lock") and openable:
 		if collided and not opened:
