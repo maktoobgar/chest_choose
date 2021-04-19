@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://single-sprites/objects/Scroll/scroll.png" type="Texture" id=1]
+[ext_resource path="res://scripts/scroll.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 28
+font_data = SubResource( 4 )
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+extra_spacing_char = -1
+extra_spacing_space = -1
+font_data = SubResource( 2 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "scroll_open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("scrollPicMargin:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.287175, 3.605 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+
+[node name="scroll" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scrollPicMargin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_constants/margin_top = 25
+custom_constants/margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scrollPic" type="TextureRect" parent="scrollPicMargin"]
+margin_top = 25.0
+margin_right = 576.0
+margin_bottom = 299.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hBoxScrollFinderContainer" type="HBoxContainer" parent="scrollPicMargin/scrollPic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="allignMargin1" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer"]
+margin_right = 213.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+
+[node name="contextMargin" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer"]
+margin_left = 217.0
+margin_right = 358.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="vBoxTextContextFinderContainer" type="VBoxContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin"]
+margin_right = 141.0
+margin_bottom = 274.0
+
+[node name="allignMargin1" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer"]
+margin_right = 141.0
+margin_bottom = 53.0
+size_flags_vertical = 3
+
+[node name="textMargin" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer"]
+margin_top = 57.0
+margin_right = 141.0
+margin_bottom = 216.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.93
+
+[node name="vBoxTitleTextSeperator" type="VBoxContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer/textMargin"]
+margin_right = 141.0
+margin_bottom = 159.0
+
+[node name="title" type="Label" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer/textMargin/vBoxTitleTextSeperator"]
+margin_right = 141.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Danger"
+align = 1
+valign = 1
+
+[node name="context" type="Label" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer/textMargin/vBoxTitleTextSeperator"]
+margin_top = 32.0
+margin_right = 141.0
+margin_bottom = 143.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "This is a Test for me to see if the text in the scroll actually works fine or needs a little bit of more work
+bla bla bla"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="allignMargin2" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer/contextMargin/vBoxTextContextFinderContainer"]
+margin_top = 220.0
+margin_right = 141.0
+margin_bottom = 274.0
+size_flags_vertical = 3
+
+[node name="allignMargin2" type="MarginContainer" parent="scrollPicMargin/scrollPic/hBoxScrollFinderContainer"]
+margin_left = 362.0
+margin_right = 576.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/scroll_open = SubResource( 1 )
