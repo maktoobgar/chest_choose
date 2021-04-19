@@ -15,7 +15,7 @@
 [ext_resource path="res://animations/characters/dude monster/Dude_Monster_Attack1_4.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.24777, 12.0594 )
+extents = Vector2( 3, 12 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Attack"
@@ -604,11 +604,8 @@ graph_offset = Vector2( -414, -75.3885 )
 script = ExtResource( 11 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( 14, 20 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="animationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 2 )
@@ -632,6 +629,7 @@ parameters/playback = SubResource( 38 )
 
 [node name="character" type="Sprite" parent="."]
 texture = ExtResource( 13 )
+centered = false
 hframes = 4
 __meta__ = {
 "_edit_lock_": true
