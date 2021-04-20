@@ -1,8 +1,9 @@
 # Local resources repository
 resources
 
-# config files for backend
+# config files and environment folders for backend
 .env
+env
 
 # Node modules
 node_modules
