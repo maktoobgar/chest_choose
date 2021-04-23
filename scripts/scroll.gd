@@ -20,6 +20,7 @@ func _process(delta):
 	margin.rect_pivot_offset = margin.rect_size/2
 	if Input.is_action_just_pressed("ui_attack") and backward:
 		play_backward_func()
+		backward = false
 
 func play_func(attr: Array) -> void:
 	title.text = attr[0].replace('\\n', '\n')
