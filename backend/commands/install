@@ -33,6 +33,7 @@ npm install
 adonis install mysql
 adonis install @adonisjs/validator@5.0.6
 adonis install @adonisjs/websocket
+adonis install @adonisjs/persona
 
 # Everything is done
 echo && echo "The installation process is done" | lolcat -d 1
