@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/hint_text_changer.gd" type="Script" id=1]
+[ext_resource path="res://single-sprites/objects/Dialogbar/dialog_half.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+extra_spacing_top = 2
+font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 4.14106, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="hint" type="HBoxContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -45.0
+rect_min_size = Vector2( 0, 35 )
+alignment = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="NinePatchRect" parent="."]
+margin_left = 144.0
+margin_right = 432.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 288, 0 )
+texture = ExtResource( 2 )
+
+[node name="labelContainer" type="VBoxContainer" parent="background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="labelCenterer" type="CenterContainer" parent="background/labelContainer"]
+margin_right = 288.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="background/labelContainer/labelCenterer"]
+margin_left = 34.0
+margin_top = 8.0
+margin_right = 254.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 2 )
+text = "Press F To Open-E To Lock On"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/Fade = SubResource( 3 )
