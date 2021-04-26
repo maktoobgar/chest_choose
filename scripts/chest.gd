@@ -3,14 +3,9 @@ extends Area2D
 
 signal select_and_set_color
 
-onready var root = get_tree().root.get_child(0)
-onready var chestAnimation = get_node_or_null('./chestAnimation')
-onready var player = root.find_node('player')
-onready var dialog: HBoxContainer = root.find_node('dialog')
-onready var scroll: Control = root.find_node('scroll')
+onready var chestAnimation = get_node('./chestAnimation')
 var collided: bool = false
-var opened: bool = false
-var openable: bool = true
+var box_state = Global.BoxState.NOTOPENED
 
 export(String) var title
 export(String) var context
@@ -19,43 +14,42 @@ func _ready():
 	self.connect('select_and_set_color', self, 'select_and_set_color_func')
 
 func _process(delta):
-	if Input.is_action_just_released("ui_interact"):
-		if collided and not opened and openable and player.has_box_func():
-			opened = true
-			chestAnimation.play("Open")
-			scroll.emit_signal('play', ['Title', 'text'])
-			player.emit_signal("stop_move")
-			dialog.visible = false
-	elif Input.is_action_just_released("ui_lock") and openable:
-		if collided and not opened:
-			player.emit_signal('set_box', self)
-	elif Input.is_action_just_released("ui_lock") and not openable:
-		if collided and not opened:
-			player.emit_signal('clean_box')
+	if Input.is_action_just_released("ui_interact") and collided and box_state == Global.BoxState.NOTOPENED and Global.player.has_box_func():
+		box_state = Global.BoxState.OPENED
+		chestAnimation.play("Open")
+		Global.scroll.emit_signal('play', ['Title', 'text'])
+		Global.player.emit_signal("stop_move")
+		Global.hint.emit_signal('visible', false)
+	elif Input.is_action_just_released("ui_lock") and collided and box_state == Global.BoxState.NOTOPENED:
+		Global.player.emit_signal('set_box', self)
+	elif Input.is_action_just_released("ui_lock") and collided and box_state == Global.BoxState.LOCKED:
+		Global.player.emit_signal('clean_box')
 
 func _on_chest_body_entered(body):
-	if not opened:
+	if box_state != Global.BoxState.OPENED:
 		collided = true
-		dialog.emit_signal('change_text', next_text())
-		dialog.visible = true
+		Global.hint.emit_signal('change_text', next_text())
+		Global.hint.emit_signal('visible', true)
 
 func _on_chest_body_exited(body):
-	if not opened:
+	if box_state != Global.BoxState.OPENED:
 		collided = false
-		dialog.visible = false
+		Global.hint.emit_signal('visible', false)
 
 func select_and_set_color_func():
 	if self.modulate == Color.white:
 		self.modulate = Color.cyan
-		openable = false
-		dialog.emit_signal('change_text', next_text())
+		box_state = Global.BoxState.LOCKED
+		Global.hint.emit_signal('change_text', next_text())
 	elif self.modulate == Color.cyan:
 		self.modulate = Color.white
-		openable = true
-		dialog.emit_signal('change_text', next_text())
+		box_state = Global.BoxState.NOTOPENED
+		Global.hint.emit_signal('change_text', next_text())
 
 func next_text() -> String:
-	if openable and not opened:
+	if box_state == Global.BoxState.NOTOPENED and collided:
 		return 'Press F To Open-E To Lock'
-	else:
+	elif box_state == Global.BoxState.LOCKED and collided:
 		return 'Press E To Clean Your Choice'
+	else:
+		return ''

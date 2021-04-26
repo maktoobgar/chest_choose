@@ -4,8 +4,6 @@ extends Control
 signal play
 signal play_backward
 
-onready var root = get_tree().root.get_child(0)
-onready var player = root.find_node('player')
 onready var margin: MarginContainer = get_node('./scrollPicMargin')
 onready var animation: AnimationPlayer = get_node('./animation')
 onready var title: Label = find_node('title')
@@ -32,4 +30,4 @@ func play_func(attr: Array) -> void:
 
 func play_backward_func() -> void:
 	animation.play_backwards("scroll_open")
-	player.emit_signal('allow_move')
+	Global.player.emit_signal('allow_move')

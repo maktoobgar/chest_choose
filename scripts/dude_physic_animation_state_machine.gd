@@ -178,9 +178,9 @@ func stop_move_func() -> void:
 	allowed = false
 
 func set_box_func(selected) -> void:
-	selected.emit_signal('select_and_set_color')
 	if box:
 		box.emit_signal('select_and_set_color')
+	selected.emit_signal('select_and_set_color')
 	box = selected
 
 func clean_box_func() -> void:

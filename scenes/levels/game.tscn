@@ -42,7 +42,7 @@
 [ext_resource path="res://single-sprites/objects/Boxes/6.png" type="Texture" id=40]
 [ext_resource path="res://scenes/instances/mouse.tscn" type="PackedScene" id=41]
 [ext_resource path="res://scenes/instances/UI/ui.tscn" type="PackedScene" id=42]
-[ext_resource path="res://scenes/instances/UI/dialog.tscn" type="PackedScene" id=43]
+[ext_resource path="res://scenes/instances/UI/hint.tscn" type="PackedScene" id=43]
 [ext_resource path="res://scenes/instances/UI/scroll.tscn" type="PackedScene" id=44]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -1574,7 +1574,7 @@ position = Vector2( 96, 192 )
 
 [node name="scroll" parent="cameraCanvas" instance=ExtResource( 44 )]
 
-[node name="dialog" parent="cameraCanvas" instance=ExtResource( 43 )]
+[node name="hint" parent="cameraCanvas" instance=ExtResource( 43 )]
 
 [node name="ui" parent="cameraCanvas" instance=ExtResource( 42 )]
 
