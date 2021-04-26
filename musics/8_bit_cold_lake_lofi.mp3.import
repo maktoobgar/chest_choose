@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8_bit_cold_lake_lofi.mp3-696b563b0a1a16cbcc8bfd2b5a5a6a4e.mp3str"
+
+[deps]
+
+source_file="res://musics/8_bit_cold_lake_lofi.mp3"
+dest_files=[ "res://.import/8_bit_cold_lake_lofi.mp3-696b563b0a1a16cbcc8bfd2b5a5a6a4e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
