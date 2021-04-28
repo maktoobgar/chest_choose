@@ -31,7 +31,7 @@ alias stickers="echo stickers:;echo ⚜️ = initial commit;echo 🐛 = bug fixi
 echo && echo Installing the requirements | lolcat -d 1 && echo
 npm install
 adonis install mysql
-adonis install @adonisjs/validator@5.0.6
+adonis install @adonisjs/validator@5.1.0
 adonis install @adonisjs/websocket
 adonis install @adonisjs/persona
 
