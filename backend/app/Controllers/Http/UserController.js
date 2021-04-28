@@ -24,11 +24,8 @@ class UserController {
         const token = await user.tokens().where('type', 'email').fetch()
 
         response.status(201).json({
-            'id': user.id,
-            'email': user.email,
-            'usename': user.username,
-            'token': token.rows[0].token.replace(/\//g, '*'),
-            'created_at': user.created_at
+            user,
+            'token': token.rows[0].token.replace(/\//g, '*')
         })
     }
 
