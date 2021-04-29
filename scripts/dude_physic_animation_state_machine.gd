@@ -153,10 +153,10 @@ func change_animation_state_machine() -> void:
 func align_face() -> void:
 	if not allowed:
 		return
-	if Input.is_action_pressed("ui_right_shift") or Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right"):
 		if character.flip_h:
 			character.flip_h = false
-	elif Input.is_action_pressed("ui_left_shift") or Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("ui_left"):
 		if not character.flip_h:
 			character.flip_h = true
 
