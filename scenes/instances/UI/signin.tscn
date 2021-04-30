@@ -1,0 +1,403 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://single-sprites/objects/UI/button_up.png" type="Texture" id=1]
+[ext_resource path="res://single-sprites/objects/UI/button_hover.png" type="Texture" id=2]
+[ext_resource path="res://scripts/signin.gd" type="Script" id=3]
+[ext_resource path="res://single-sprites/objects/UI/button.png" type="Texture" id=4]
+[ext_resource path="res://single-sprites/objects/UI/button_2x_hover.png" type="Texture" id=5]
+[ext_resource path="res://single-sprites/objects/UI/header.png" type="Texture" id=6]
+[ext_resource path="res://single-sprites/objects/UI/button_2x_up.png" type="Texture" id=7]
+[ext_resource path="res://single-sprites/objects/UI/button_2x.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 10
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://fonts/Pixellari.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+extra_spacing_char = 2
+font_data = SubResource( 9 )
+
+[node name="signin" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="whole" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up" type="MarginContainer" parent="whole"]
+margin_right = 576.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="topbar" type="HBoxContainer" parent="whole"]
+margin_top = 33.0
+margin_right = 576.0
+margin_bottom = 91.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="left" type="MarginContainer" parent="whole/topbar"]
+margin_right = 126.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="MarginContainer" parent="whole/topbar"]
+margin_left = 130.0
+margin_right = 445.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+
+[node name="TextureButton" type="TextureButton" parent="whole/topbar/center"]
+margin_right = 315.0
+margin_bottom = 58.0
+disabled = true
+texture_disabled = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="nameLabel" type="Label" parent="whole/topbar/center/TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.941176, 0.392157, 0.0784314, 1 )
+text = "Signin"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="MarginContainer" parent="whole/topbar"]
+margin_left = 449.0
+margin_right = 576.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="context" type="HBoxContainer" parent="whole"]
+margin_top = 95.0
+margin_right = 576.0
+margin_bottom = 324.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="MarginContainer" parent="whole/context"]
+margin_right = 126.0
+margin_bottom = 229.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="MarginContainer" parent="whole/context"]
+margin_left = 130.0
+margin_right = 445.0
+margin_bottom = 229.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="whole/context/center"]
+margin_right = 315.0
+margin_bottom = 229.0
+
+[node name="up" type="MarginContainer" parent="whole/context/center/VBoxContainer"]
+margin_right = 315.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="HBoxContainer" parent="whole/context/center/VBoxContainer"]
+margin_top = 29.0
+margin_right = 315.0
+margin_bottom = 199.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="left" type="VBoxContainer" parent="whole/context/center/VBoxContainer/center"]
+margin_right = 93.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="up" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/left"]
+margin_right = 93.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up2" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/left"]
+margin_top = 54.0
+margin_right = 93.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up3" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/left"]
+margin_top = 109.0
+margin_right = 93.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+custom_constants/margin_right = 16
+custom_constants/margin_top = 4
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="backButton" type="TextureButton" parent="whole/context/center/VBoxContainer/center/left/up3"]
+margin_left = 16.0
+margin_top = 4.0
+margin_right = 77.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="whole/context/center/VBoxContainer/center/left/up3/backButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="VBoxContainer" parent="whole/context/center/VBoxContainer/center"]
+margin_left = 97.0
+margin_right = 217.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+alignment = 2
+
+[node name="usernameLabel" type="Label" parent="whole/context/center/VBoxContainer/center/center"]
+margin_right = 120.0
+margin_bottom = 11.0
+custom_fonts/font = SubResource( 6 )
+text = "Username:"
+
+[node name="usernameLineEdit" type="LineEdit" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 15.0
+margin_right = 120.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 8 )
+
+[node name="HSeparator" type="HSeparator" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 45.0
+margin_right = 120.0
+margin_bottom = 49.0
+
+[node name="PasswordLabel" type="Label" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 53.0
+margin_right = 120.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 6 )
+text = "Password:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PasswordLineEdit" type="LineEdit" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 68.0
+margin_right = 120.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 10 )
+secret = true
+placeholder_alpha = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 98.0
+margin_right = 120.0
+margin_bottom = 102.0
+
+[node name="signinButton" type="TextureButton" parent="whole/context/center/VBoxContainer/center/center"]
+margin_top = 106.0
+margin_right = 120.0
+margin_bottom = 170.0
+size_flags_vertical = 3
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="whole/context/center/VBoxContainer/center/center/signinButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "Signin"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="VBoxContainer" parent="whole/context/center/VBoxContainer/center"]
+margin_left = 221.0
+margin_right = 315.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="up" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/right"]
+margin_right = 94.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up2" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/right"]
+margin_top = 54.0
+margin_right = 94.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up3" type="MarginContainer" parent="whole/context/center/VBoxContainer/center/right"]
+margin_top = 109.0
+margin_right = 94.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+custom_constants/margin_right = 16
+custom_constants/margin_top = 4
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="signupButton" type="TextureButton" parent="whole/context/center/VBoxContainer/center/right/up3"]
+margin_left = 16.0
+margin_top = 4.0
+margin_right = 78.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="whole/context/center/VBoxContainer/center/right/up3/signupButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "Signup"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="down" type="MarginContainer" parent="whole/context/center/VBoxContainer"]
+margin_top = 203.0
+margin_right = 315.0
+margin_bottom = 229.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="MarginContainer" parent="whole/context"]
+margin_left = 449.0
+margin_right = 576.0
+margin_bottom = 229.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_up" from="whole/context/center/VBoxContainer/center/left/up3/backButton" to="." method="_on_backButton_button_up"]
+[connection signal="button_up" from="whole/context/center/VBoxContainer/center/right/up3/signupButton" to="." method="_on_signupButton_button_up"]
