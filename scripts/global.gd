@@ -5,18 +5,18 @@ enum BoxStates {NOTOPENED, OPENED, LOCKED}
 
 const user_data: String = "user://userdata.save"
 
-onready var root: Node = get_tree().root.get_child(2)
-onready var player: KinematicBody2D = root.get_node_or_null('player')
-onready var chests: Node2D = root.get_node_or_null('chests')
-onready var hint: HBoxContainer = root.get_node_or_null('cameraCanvas/hint')
-onready var scroll: Control = root.get_node_or_null('cameraCanvas/scroll')
-onready var ui: Control = root.get_node_or_null('cameraCanvas/ui')
-onready var mouse: Node2D = root.get_node_or_null('cameraCanvas/mouse')
-onready var main_scene: Control = root.get_node_or_null('main')
-onready var signin_scene: Control = root.get_node_or_null('signin')
-onready var signup_scene: Control = root.get_node_or_null('signup')
-onready var popup_scene: Control = root.get_node_or_null('popup')
-onready var current_scene: Control = main_scene
+var root: Node
+var player: KinematicBody2D
+var chests: Node2D
+var hint: HBoxContainer
+var scroll: Control
+var ui: Control
+var mouse: Node2D
+var main_scene: Control
+var signin_scene: Control
+var signup_scene: Control
+var popup_scene: Control
+var current_scene: Control
 var back: Array = []
 
 #user_data
@@ -25,6 +25,22 @@ var email: String = ""
 var token: String = ""
 
 func _ready() -> void:
+	root = get_tree().root.get_child(2)
+	player = root.get_node_or_null('player')
+	chests = root.get_node_or_null('chests')
+	hint = root.get_node_or_null('cameraCanvas/hint')
+	scroll = root.get_node_or_null('cameraCanvas/scroll')
+	ui = root.get_node_or_null('cameraCanvas/ui')
+	mouse = root.get_node_or_null('cameraCanvas/mouse')
+	main_scene = root.get_node_or_null('main')
+	signin_scene = root.get_node_or_null('signin')
+	signup_scene = root.get_node_or_null('signup')
+	popup_scene = root.get_node_or_null('popup')
+	current_scene = main_scene
+	back = []
+	username = ""
+	email = ""
+	token = ""
 	load_user_data()
 
 func back_scene() -> void:
