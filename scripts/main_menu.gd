@@ -24,7 +24,7 @@ func _on_signinButton_button_up():
 		signin_label.text = 'Signin'
 
 func _on_startButton_button_up():
-	pass # Replace with function body.
+	get_tree().change_scene("res://scenes/levels/game.tscn")
 
 func change_signin_button_text_func():
 	if signin_label.text == 'Signin':
