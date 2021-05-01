@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://single-sprites/objects/UI/button_up.png" type="Texture" id=1]
 [ext_resource path="res://single-sprites/objects/UI/button_hover.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://single-sprites/objects/UI/header.png" type="Texture" id=6]
 [ext_resource path="res://single-sprites/objects/UI/button_2x_up.png" type="Texture" id=7]
 [ext_resource path="res://single-sprites/objects/UI/button_2x.png" type="Texture" id=8]
+[ext_resource path="res://single-sprites/objects/UI/button_2x_disabled.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Pixellari.ttf"
@@ -202,18 +203,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.2
 custom_constants/margin_right = 16
-custom_constants/margin_top = 4
+custom_constants/margin_top = 3
 custom_constants/margin_left = 16
-custom_constants/margin_bottom = 6
+custom_constants/margin_bottom = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="backButton" type="TextureButton" parent="whole/context/center/VBoxContainer/center/left/up3"]
 margin_left = 16.0
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 77.0
-margin_bottom = 55.0
+margin_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 4 )
@@ -296,6 +297,7 @@ size_flags_vertical = 3
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 
@@ -344,18 +346,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.2
 custom_constants/margin_right = 16
-custom_constants/margin_top = 4
+custom_constants/margin_top = 3
 custom_constants/margin_left = 16
-custom_constants/margin_bottom = 6
+custom_constants/margin_bottom = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="signupButton" type="TextureButton" parent="whole/context/center/VBoxContainer/center/right/up3"]
 margin_left = 16.0
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 78.0
-margin_bottom = 55.0
+margin_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 4 )
@@ -400,4 +402,5 @@ __meta__ = {
 }
 
 [connection signal="button_up" from="whole/context/center/VBoxContainer/center/left/up3/backButton" to="." method="_on_backButton_button_up"]
+[connection signal="button_up" from="whole/context/center/VBoxContainer/center/center/signinButton" to="." method="_on_signinButton_button_up"]
 [connection signal="button_up" from="whole/context/center/VBoxContainer/center/right/up3/signupButton" to="." method="_on_signupButton_button_up"]
