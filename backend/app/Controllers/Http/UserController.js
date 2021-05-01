@@ -24,8 +24,7 @@ class UserController {
         const token = await user.tokens().where('type', 'email').fetch()
 
         response.status(201).json({
-            user,
-            'token': token.rows[0].token.replace(/\//g, '*')
+            "token": token.rows[0].token.replace(/\//g, '*')
         })
     }
 
@@ -47,26 +46,23 @@ class UserController {
         if (username_user && email_user) {
             if (username_user.id === email_user.id) {
                 const token = await auth.withRefreshToken().attempt(email, password)
-                response.status(200).json({
-                    "token": token.token
-                })
+                username_user['token'] = token.token
+                response.status(200).json(username_user)
             }
         }
         else if (username_user) {
             const token = await auth.withRefreshToken().attempt(username_user.email, password)
-            response.status(200).json({
-                "token": token.token
-            })
+            username_user['token'] = token.token
+            response.status(200).json(username_user)
         }
         else if (email_user) {
             const token = await auth.withRefreshToken().attempt(email, password)
-            response.status(200).json({
-                "token": token.token
-            })
+            email_user['token'] = token.token
+            response.status(200).json(email_user)
         }
         else {
             response.status(400).json({
-                "message": "bad request"
+                "message": "login was not successful"
             })
         }
     }
@@ -76,12 +72,13 @@ class UserController {
     * @param {Request} ctx.request
     * @param {Response} ctx.response
     */
-    async email_validate({ request, response, params }) {
+    async email_validate({ auth, response, params }) {
         const user = await Persona.verifyEmail(params.token.replace(/\*/g, '/'))
 
-        response.status(200).json({
-            'message': 'your email validated'
-        })
+        const token = await auth.withRefreshToken().generate(user)
+        user['token'] = token.token
+
+        response.status(200).json(user)
     }
 
     /**
