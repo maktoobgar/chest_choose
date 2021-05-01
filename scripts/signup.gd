@@ -30,13 +30,10 @@ func _on_signupButton_button_up():
 		"password_confirmation": confirm_password.text
 	}
 	data = str(JSON.print(data))
-	print(data)
 	Request.send_request(data, Request.signup, {"node": self})
 	signup_button.disabled = true
 
 func _on_finished_request_func(data: Dictionary):
-	print(data["response_code"])
-	print(data["body"])
 	if data["response_code"] == 200 or data["response_code"] == 201:
 		if not 'username' in data['body']:
 			Request.send_request("", Request.validate, {"node": self, "token": data['body']['token']})
