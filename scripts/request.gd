@@ -39,5 +39,4 @@ func send_request(data = null, url: String = "", extra: Dictionary = {}) -> void
 		elif url == self.me:
 			request(host+url, headers, false, HTTPClient.METHOD_GET, data)
 		elif url == self.validate:
-			print('validate')
 			request((host+url) % extra['token'], headers, false, HTTPClient.METHOD_GET, data)
