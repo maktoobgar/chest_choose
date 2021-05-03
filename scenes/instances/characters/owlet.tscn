@@ -1,6 +1,5 @@
 [gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://single-sprites/backgrounds/Background.png" type="Texture" id=1]
 [ext_resource path="res://animations/characters/owlet_monster/Owlet_Monster_Hurt_4.png" type="Texture" id=2]
 [ext_resource path="res://animations/characters/owlet_monster/Owlet_Monster_Idle_4.png" type="Texture" id=3]
 [ext_resource path="res://animations/characters/owlet_monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
@@ -13,6 +12,7 @@
 [ext_resource path="res://animations/characters/owlet_monster/Owlet_Monster_Walk_6.png" type="Texture" id=11]
 [ext_resource path="res://animations/characters/owlet_monster/Owlet_Monster_Walk+Attack_6.png" type="Texture" id=12]
 [ext_resource path="res://scripts/character.gd" type="Script" id=13]
+[ext_resource path="res://single-sprites/objects/Light/light.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 12 )
@@ -765,6 +765,9 @@ texture = ExtResource( 4 )
 centered = false
 hframes = 8
 frame = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2( 14, 20 )
@@ -774,17 +777,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="background" type="ParallaxBackground" parent="."]
-
-[node name="backgroundLayer" type="ParallaxLayer" parent="background"]
-motion_scale = Vector2( 0.1, 0.1 )
-motion_offset = Vector2( 0, -364.5 )
-motion_mirroring = Vector2( 1080, 0 )
-
-[node name="image" type="Sprite" parent="background/backgroundLayer"]
-scale = Vector2( 1.875, 1.875 )
-texture = ExtResource( 1 )
-centered = false
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="light" type="Light2D" parent="."]
+position = Vector2( 32, 0 )
+texture = ExtResource( 14 )
+texture_scale = 0.5
+energy = 0.6
