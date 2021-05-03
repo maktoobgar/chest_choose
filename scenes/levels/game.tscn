@@ -1,7 +1,6 @@
-[gd_scene load_steps=125 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://scenes/instances/chest.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/instances/characters/pink.tscn" type="PackedScene" id=2]
 [ext_resource path="res://single-sprites/objects/Ladders/ladder.png" type="Texture" id=3]
 [ext_resource path="res://single-sprites/tilesets/Tileset.png" type="Texture" id=4]
 [ext_resource path="res://single-sprites/objects/Willows/3.png" type="Texture" id=5]
@@ -1569,7 +1568,7 @@ position = Vector2( 160, 160 )
 [node name="chest" parent="chests" instance=ExtResource( 1 )]
 position = Vector2( 96, 192 )
 
-[node name="player" parent="." instance=ExtResource( 2 )]
+[node name="pivot" type="Node2D" parent="."]
 position = Vector2( 0, 256 )
 
 [node name="cameraCanvas" type="CanvasLayer" parent="."]
