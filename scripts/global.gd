@@ -18,7 +18,7 @@ var signup_scene: Control
 var popup_scene: Control
 var pivot: Node2D
 var current_scene: Control
-var select_character: Resource = null
+var select_character: Resource = preload("res://scenes/instances/characters/dude.tscn")
 var back: Array = []
 
 #user_data
@@ -48,6 +48,8 @@ func _ready() -> void:
 func select_character_func():
 	player = select_character.instance()
 	player.position = pivot.position
+	for child in pivot.get_children():
+		pivot.remove_child(child)
 	pivot.replace_by(player, false)
 
 func back_scene() -> void:
