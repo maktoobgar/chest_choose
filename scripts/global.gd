@@ -16,7 +16,9 @@ var main_scene: Control
 var signin_scene: Control
 var signup_scene: Control
 var popup_scene: Control
+var pivot: Node2D
 var current_scene: Control
+var select_character: Resource = null
 var back: Array = []
 
 #user_data
@@ -26,7 +28,6 @@ var token: String = ""
 
 func _ready() -> void:
 	root = get_tree().root.get_child(2)
-	player = root.get_node_or_null('player')
 	chests = root.get_node_or_null('chests')
 	hint = root.get_node_or_null('cameraCanvas/hint')
 	scroll = root.get_node_or_null('cameraCanvas/scroll')
@@ -36,12 +37,18 @@ func _ready() -> void:
 	signin_scene = root.get_node_or_null('signin')
 	signup_scene = root.get_node_or_null('signup')
 	popup_scene = root.get_node_or_null('popup')
+	pivot = root.get_node_or_null('pivot')
 	current_scene = main_scene
 	back = []
 	username = ""
 	email = ""
 	token = ""
 	load_user_data()
+
+func select_character_func():
+	player = select_character.instance()
+	player.position = pivot.position
+	pivot.replace_by(player, false)
 
 func back_scene() -> void:
 	hidden_all()
