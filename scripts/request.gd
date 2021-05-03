@@ -15,20 +15,21 @@ func _ready():
 	self.timeout = 10
 	self.connect("request_completed", self, "_on_request_completed")
 
+func _debug(body):
+	var file = File.new()
+	file.open("res://error.html", File.WRITE)
+	file.store_string(body.get_string_from_utf8())
+	file.close()
+
 func _on_request_completed(result, response_code, headers, body):
 	if node:
+		_debug(body)
 		body = JSON.parse(body.get_string_from_utf8()).result
 		if body == null:
 			body = {}
 		var tempnode = node
 		node = null
 		tempnode.emit_signal("_on_finished_request", {"response_code": response_code, "body": body})
-
-func _debug(body):
-	var file = File.new()
-	file.open("res://error.html", File.WRITE)
-	file.store_string(body.get_string_from_utf8())
-	file.close()
 
 func send_request(data = null, url: String = "", extra: Dictionary = {}) -> void:
 	if not node:

@@ -24,7 +24,7 @@ func _on_signinButton_button_up():
 			"username": username.text,
 			"password": password.text
 		}
-		data = str(data)
+		data = JSON.print(data)
 		signinButton.disabled = true
 		Request.send_request(data, Request.signin, {"node": self})
 
