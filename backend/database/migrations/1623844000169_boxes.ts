@@ -6,7 +6,7 @@ export default class Boxes extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.integer('creator').unsigned().references('id').inTable('users').onDelete('RESTRICT').nullable()
+      table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('RESTRICT').nullable()
       table.string('title', 10).notNullable()
       table.string('context', 150).notNullable()
       table.enum('color', [0, 1, 2]).notNullable().defaultTo(0)

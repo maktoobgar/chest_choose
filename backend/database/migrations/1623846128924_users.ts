@@ -5,13 +5,13 @@ export default class Users extends BaseSchema {
 
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.foreign('box').references('id').inTable('boxes').onDelete('RESTRICT')
+      table.foreign('box_id').references('id').inTable('boxes').onDelete('RESTRICT')
     })
   }
 
   public async down () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.dropForeign('box')
+      table.dropForeign('box_id')
     })
   }
 }
