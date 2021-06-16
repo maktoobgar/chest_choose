@@ -4,7 +4,10 @@ import {
   column,
   beforeSave,
   BaseModel,
+  belongsTo,
+  BelongsTo,
 } from '@ioc:Adonis/Lucid/Orm'
+import Box from 'App/Models/Box'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -19,8 +22,11 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password: string
   
-  @column()
-  public rememberMeToken?: string
+  @belongsTo(() => Box, {
+    foreignKey: 'box',
+    localKey: 'id'
+  })
+  public box: BelongsTo<typeof Box>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

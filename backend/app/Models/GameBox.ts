@@ -11,7 +11,10 @@ export default class GameBox extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @hasOne(() => Box)
+  @hasOne(() => Box, {
+    foreignKey: 'boxId',
+    localKey: 'id'
+  })
   public boxes: HasOne<typeof Box>
 
   @column.dateTime({ autoCreate: true })

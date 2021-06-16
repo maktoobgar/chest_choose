@@ -14,10 +14,16 @@ export default class Game extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @belongsTo(() => User)
+  @belongsTo(() => User, {
+    foreignKey: 'creator',
+    localKey: 'id'
+  })
   public creator: BelongsTo<typeof User>
   
-  @hasMany(() => GameBox)
+  @hasMany(() => GameBox, {
+    foreignKey: 'gameId',
+    localKey: 'id'
+  })
   public boxes: HasMany<typeof GameBox>
 
   @column.dateTime({ autoCreate: true })
