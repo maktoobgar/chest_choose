@@ -16,7 +16,7 @@ export default class UsersController {
         await request.validate(UserSignupValidator)
         const { username, email, password } = request.only(['username', 'email', 'password'])
         const user = await User.create({ username, email, password })
-        const token = await auth.login(user)
+        const token = await auth.login(user, {expiresIn: '30days'})
         const obj = user.serialize()
         obj.token = 'bearer ' + token.token
         response.status(201).json(obj)
