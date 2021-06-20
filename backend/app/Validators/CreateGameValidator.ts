@@ -1,17 +1,16 @@
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-const State = [ 'created', 'inprogress', 'finished' ]
 export default class CreateGameValidator {
 	constructor(protected ctx: HttpContextContract) {
 	}
 
 	public schema = schema.create({
-		'state': schema.enum(State)
+		'title': schema.string.optional({ trim: true }, [ rules.maxLength(50) ]),
 	})
 
 	public messages = {
-		'enum': '{{ options.choices }} are acceptable values',
+		'maxLength': '{{ field }} can have {{ options.maxLength }} characters at most',
 		'required': '{{ field }} is required'
 	}
 }
