@@ -6,6 +6,7 @@ export default class Games extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
+      table.string('title', 50).nullable()
       table.integer('creator_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.enum('state', [0, 1, 2]).notNullable().defaultTo(0)
 

@@ -12,16 +12,16 @@ export default class GameBox extends BaseModel {
   public id: number
   
   @column({ serializeAs: null })
-  public box_id: number
+  public boxId: number
 
   @hasOne(() => Box, {
-    foreignKey: 'boxId',
-    localKey: 'id'
+    foreignKey: 'id',
+    localKey: 'boxId'
   })
-  public boxes: HasOne<typeof Box>
+  public box: HasOne<typeof Box>
 
   @column({ serializeAs: null })
-  public game_id: number
+  public gameId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -12,10 +12,10 @@ export default class Box extends BaseModel {
   public id: number
 
   @column({ serializeAs: null })
-  public creator_id: number
+  public creatorId: number
 
   @belongsTo(() => User, {
-    foreignKey: 'creator_id',
+    foreignKey: 'creatorId',
     localKey: 'id'
   })
   public creator: BelongsTo<typeof User>
@@ -27,7 +27,7 @@ export default class Box extends BaseModel {
   public context: string
 
   @column()
-  public color: string
+  public color: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

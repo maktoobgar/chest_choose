@@ -23,10 +23,10 @@ export default class User extends BaseModel {
   public password: string
 
   @column({ serializeAs: null })
-  public box_id: number
+  public boxId: number
 
   @belongsTo(() => Box, {
-    foreignKey: 'box_id',
+    foreignKey: 'boxId',
     localKey: 'id'
   })
   public box: BelongsTo<typeof Box>

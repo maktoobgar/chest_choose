@@ -15,10 +15,13 @@ export default class Game extends BaseModel {
   public id: number
 
   @column({ serializeAs: null })
-  public creator_id: number
+  public creatorId: number
 
   @column()
-  public state: string
+  public state: number
+
+  @column()
+  public title: string
 
   @belongsTo(() => User, {
     foreignKey: 'creatorId',
