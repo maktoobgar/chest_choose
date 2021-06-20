@@ -7,16 +7,16 @@ export default class UsersController {
     public async signin({ request, response, auth }: HttpContextContract) {
         await request.validate(UserSigninValidator)
         const { username, email, password } = request.only(['username', 'email', 'password'])
-        const uid = username? username: email
-        const token = await auth.attempt(uid, password, {expiresIn: '30days'})
-        response.status(200).json({'token': 'bearer ' + token.token})
+        const uid = username ? username : email
+        const token = await auth.attempt(uid, password, { expiresIn: '30days' })
+        response.status(200).json({ 'token': 'bearer ' + token.token })
     }
 
     public async signup({ request, response, auth }: HttpContextContract) {
         await request.validate(UserSignupValidator)
         const { username, email, password } = request.only(['username', 'email', 'password'])
         const user = await User.create({ username, email, password })
-        const token = await auth.login(user, {expiresIn: '30days'})
+        const token = await auth.login(user, { expiresIn: '30days' })
         const obj = user.serialize()
         obj.token = 'bearer ' + token.token
         response.status(201).json(obj)
@@ -24,6 +24,12 @@ export default class UsersController {
 
     public async signout({ response, auth }: HttpContextContract) {
         await auth.logout()
-        response.accepted({ 'message': 'logged out successfully' })
+        response.status(202).json({ 'message': 'logged out successfully' })
+    }
+
+    public async me({ response, auth }: HttpContextContract) {
+        const user = auth.user
+        if (user?.boxId) await user?.load('box')
+        response.status(200).json(user)
     }
 }
